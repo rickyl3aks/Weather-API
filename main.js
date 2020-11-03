@@ -33,16 +33,13 @@ function getWeather(e) {
       temp.innerHTML = `${Math.ceil(data.main.temp)}°`;
       //get weather
       weather.innerHTML = data.weather[0].main;
+    })
+    .catch((error) => {
+      temp.innerHTML = "";
+      country.innerHTML = "";
+      weather.innerHTML = "";
+      icon.innerHTML = `<img src="icons/unknown.png" />`;
+      city.textContent = "Please insert a city";
+      console.error(error);
     });
-  noCity();
-}
-
-function noCity() {
-  if (404) {
-    temp.innerHTML = "";
-    country.innerHTML = "";
-    weather.innerHTML = "";
-    icon.innerHTML = `<img src="icons/unknown.png" />`;
-    city.textContent = "Please insert a city";
-  }
 }
