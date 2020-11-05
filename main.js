@@ -12,7 +12,7 @@ btn.addEventListener("click", (e) => {
   e.preventDefault();
   getWeather(e);
 });
-function getWeather(e) {
+async function getWeather() {
   //get API
   let api =
     "https://cors-anywhere.herokuapp.com/" +
@@ -20,26 +20,24 @@ function getWeather(e) {
     input.value +
     "&APPID=6cdb1a2bc26117586f24e1ce19ff912b&units=metric";
   //fetch API
-  fetch(api)
-    .then((response) => response.json())
-    .then((data) => {
-      //get country
-      country.innerHTML = `(${data.sys.country})`;
-      //get icon
-      icon.innerHTML = `<img src="icons/${data.weather[0].icon}.png"/>`;
-      //get city
-      city.textContent = data.name;
-      //get temperature
-      temp.innerHTML = `${Math.ceil(data.main.temp)}°`;
-      //get weather
-      weather.innerHTML = data.weather[0].main;
-    })
-    .catch((error) => {
-      temp.innerHTML = "";
-      country.innerHTML = "";
-      weather.innerHTML = "";
-      icon.innerHTML = `<img src="icons/unknown.png" />`;
-      city.textContent = "Please insert a city";
-      console.error(error);
-    });
+  const response = await fetch(api);
+  const data = await response.json();
+  try {
+    //get country
+    country.innerHTML = `(${data.sys.country})`;
+    //get icon
+    icon.innerHTML = `<img src="icons/${data.weather[0].icon}.png"/>`;
+    //get city
+    city.textContent = data.name;
+    //get temperature
+    temp.innerHTML = `${Math.ceil(data.main.temp)}°`;
+    //get weather
+    weather.innerHTML = data.weather[0].main;
+  } catch (e) {
+    temp.innerHTML = "";
+    country.innerHTML = "";
+    weather.innerHTML = "";
+    icon.innerHTML = `<img src="icons/unknown.png" />`;
+    city.textContent = "Please insert a city";
+  }
 }
