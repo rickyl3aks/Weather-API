@@ -16,7 +16,8 @@ async function getWeather() {
   //get API
   let api =
     // "https://cors-anywhere.herokuapp.com/" + changes in CORS
-    "http://api.openweathermap.org/data/2.5/weather?q=" +
+
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
     input.value +
     "&APPID=6cdb1a2bc26117586f24e1ce19ff912b&units=metric";
   //fetch API
